@@ -1,21 +1,21 @@
-import java.awt.*;
+import javax.crypto.*;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.security.SecureRandom;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.ArrayList;
 import java.util.Base64;
-import javax.crypto.*;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.PBEParameterSpec;
 
 
 // This class is used to create a loading screen
@@ -40,7 +40,7 @@ class SplashScreen {
         frame.setUndecorated(true);
         frame.setSize(400,400); // to set the size of the frame
         frame.setLocationRelativeTo(null);
-        frame.getContentPane().setBackground(new Color(0XFF8787)); // to set the background color of the frame
+        frame.getContentPane().setBackground(new Color(0xFDF200)); // to set the background color of the frame
         frame.setVisible(true);
     }
 
@@ -48,15 +48,15 @@ class SplashScreen {
         image.setSize(400,200); // to set the size of the image
         frame.add(image);
     }
-    
+
     public void addText()
     {
-        text.setFont(new Font("MV Boli",Font.BOLD,20)); // to set the font of the text
+        text.setFont(new Font("Times New Roman",Font.BOLD,20)); // to set the font of the text
         text.setBounds(30,200,400,30);
-        text.setForeground(Color.black);
+        text.setForeground(Color.BLUE);
         frame.add(text);
     }
-    
+
     public void addProgressBar(){
         progressBar.setBounds(100,280,200,30); // to set the size of the progress bar
         progressBar.setBorderPainted(true);
@@ -113,7 +113,7 @@ class HashtablePassword implements hashTableMap {
         return (h+i) % entries.length;  //Linear Probing
     }
 
-    private void rehash(){ 
+    private void rehash(){
         Entry[] oldEntries = entries;
         entries = new Entry[2*entries.length+1];
         for (Entry entry : oldEntries) {
@@ -183,15 +183,15 @@ class HashtablePassword implements hashTableMap {
         return null;
     }
 }
-class CryptoUtil 
+class CryptoUtil
 {
 
     Cipher ecipher;
     Cipher dcipher;
     // 8-byte Salt
     byte[] salt = {
-        (byte) 0xA9, (byte) 0x9B, (byte) 0xC8, (byte) 0x32,
-        (byte) 0x56, (byte) 0x35, (byte) 0xE3, (byte) 0x03
+            (byte) 0xA9, (byte) 0x9B, (byte) 0xC8, (byte) 0x32,
+            (byte) 0x56, (byte) 0x35, (byte) 0xE3, (byte) 0x03
     };
     // Iteration count
     int iterationCount = 19;
@@ -200,21 +200,6 @@ class CryptoUtil
 
     }
 
-    /**
-     *
-     * @param secretKey Key used to encrypt data
-     * @param plainText Text input to be encrypted
-     * @return Returns encrypted text
-     * @throws java.security.NoSuchAlgorithmException
-     * @throws java.security.spec.InvalidKeySpecException
-     * @throws javax.crypto.NoSuchPaddingException
-     * @throws java.security.InvalidKeyException
-     * @throws java.security.InvalidAlgorithmParameterException
-     * @throws java.io.UnsupportedEncodingException
-     * @throws javax.crypto.IllegalBlockSizeException
-     * @throws javax.crypto.BadPaddingException
-     *
-     */
     public String encrypt(String secretKey, String plainText)
             throws NoSuchAlgorithmException,
             InvalidKeySpecException,
@@ -240,26 +225,13 @@ class CryptoUtil
         return encStr;
     }
 
-    /**
-     * @param secretKey Key used to decrypt data
-     * @param encryptedText encrypted text input to decrypt
-     * @return Returns plain text after decryption
-     * @throws java.security.NoSuchAlgorithmException
-     * @throws java.security.spec.InvalidKeySpecException
-     * @throws javax.crypto.NoSuchPaddingException
-     * @throws java.security.InvalidKeyException
-     * @throws java.security.InvalidAlgorithmParameterException
-     * @throws java.io.UnsupportedEncodingException
-     * @throws javax.crypto.IllegalBlockSizeException
-     * @throws javax.crypto.BadPaddingException
-     */
+
     public String decrypt(String secretKey, String encryptedText)
             throws NoSuchAlgorithmException,
             InvalidKeySpecException,
             NoSuchPaddingException,
             InvalidKeyException,
             InvalidAlgorithmParameterException,
-            UnsupportedEncodingException,
             IllegalBlockSizeException,
             BadPaddingException,
             IOException {
@@ -276,8 +248,8 @@ class CryptoUtil
         String charSet = "UTF-8";
         String plainStr = new String(utf8, charSet);
         return plainStr;
-    }    
-   
+    }
+
 }
 
 class PasswordGenerator {
@@ -319,7 +291,7 @@ class PasswordManager implements ActionListener {
     Container conn1,conn2;
     JLabel lAcc,lPass;
     JTextArea encryptPasswdArea, genePassArea, searchPassArea;
-    JButton PassGeneBtn,PassEncryptBtn, PassStoreBtn, PassSearchBtn, AccAddBtn, PassDeleteBtn;
+    JButton PassGeneBtn, PassStoreBtn, PassSearchBtn, AccAddBtn, PassDeleteBtn;
     JTextField tAcc,tPass;
     JButton addNoteBtn;
     JLabel addNoteLabel;
@@ -343,20 +315,20 @@ class PasswordManager implements ActionListener {
     //container settings
     public static void ContainerGUI(Container conn){
         conn.setVisible(true);
-        conn.setBackground(Color.getHSBColor(20.4f, 10.5f, 12.9f));
+        conn.setBackground(Color.getHSBColor(20.4f, 10.5f, 12.9f)); // to change the color of internal container 
         conn.setLayout(null);
     }
 
 
     // buttons settings
     public void GUIButtonsSetting(JButton btn){
-        btn.setBackground(new Color(0XFB2576));
-        btn.setForeground(Color.WHITE);
-        btn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        btn.setBackground(new Color(0x0014FF)); // to change the button background color.
+        btn.setForeground(Color.white); // to change the button text color.
+        btn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3)); // to chnage the button brder color.
         btn.setFocusable(false);
-        Cursor crs = new Cursor(Cursor.HAND_CURSOR); 
+        Cursor crs = new Cursor(Cursor.HAND_CURSOR);
         btn.setCursor(crs);
-        Font fn = new Font("MV Boli", Font.BOLD, 15);
+        Font fn = new Font("Amasis MT Pro Medium", Font.BOLD, 15);
         btn.setFont(fn);
     }
 
@@ -369,7 +341,7 @@ class PasswordManager implements ActionListener {
         FrameGUI(frame2);
         conn2 = frame2.getContentPane();
         ContainerGUI(conn2);
-        Font fn = new Font("MV Boli", Font.BOLD, 20);
+        Font fn = new Font("Times New Roman", Font.BOLD, 20);
 
         //Account textFiled and label
         lAcc = new JLabel("ACCOUNT NAME");
@@ -406,7 +378,7 @@ class PasswordManager implements ActionListener {
     //for password generator and encryption
     public void textArea(String Pass,JTextArea TA){
         TA.setText(Pass);
-        Font fn = new Font("MV Boli", Font.BOLD, 20);
+        Font fn = new Font("Times New Roman", Font.BOLD, 20);
         TA.setWrapStyleWord(true);
         TA.setLineWrap(true);
         TA.setCaretPosition(0);
@@ -427,7 +399,7 @@ class PasswordManager implements ActionListener {
         background.setBounds(0,0,400,650);
         background.setVisible(true);
         frame.add(background);
-    
+
         FrameGUI(frame);
 
         conn1 = frame.getContentPane();
@@ -441,84 +413,84 @@ class PasswordManager implements ActionListener {
 
         //generating password
         PassGeneBtn.addActionListener(e -> {
-        if(PassGeneBtn ==e.getSource())
-        {
-            try{
-                int len = Integer.parseInt(JOptionPane.showInputDialog("Enter the password length"));
-                if(len>4)
-                {
-                    //  password generator class reference
-                    PasswordGenerator pass = new PasswordGenerator();
-                    String passwd = pass.generatePassword(len);
-                    genePassArea = new JTextArea(5,4);
-                    textArea(passwd,genePassArea);
-                    JOptionPane.showMessageDialog(conn1,new JScrollPane(genePassArea),"Copy your password",JOptionPane.INFORMATION_MESSAGE);
+                    if(PassGeneBtn ==e.getSource())
+                    {
+                        try{
+                            int len = Integer.parseInt(JOptionPane.showInputDialog("Enter the password length"));
+                            if(len>4)
+                            {
+                                //  password generator class reference
+                                PasswordGenerator pass = new PasswordGenerator();
+                                String passwd = pass.generatePassword(len);
+                                genePassArea = new JTextArea(5,4);
+                                textArea(passwd,genePassArea);
+                                JOptionPane.showMessageDialog(conn1,new JScrollPane(genePassArea),"Copy your password",JOptionPane.INFORMATION_MESSAGE);
 
+                            }
+                            else JOptionPane.showMessageDialog (conn1,"Password length must be greater than 8!","Invalid Input Error",JOptionPane.WARNING_MESSAGE);
+
+                        }
+                        catch(Exception ex){JOptionPane.showMessageDialog(conn1,"Write something","EXIT!",JOptionPane.ERROR_MESSAGE);}
+                    }
                 }
-                else JOptionPane.showMessageDialog (conn1,"Password length must be greater than 8!","Invalid Input Error",JOptionPane.WARNING_MESSAGE);
+        );
 
-            }
-            catch(Exception ex){JOptionPane.showMessageDialog(conn1,"Write something","EXIT!",JOptionPane.ERROR_MESSAGE);}
-        }
-    }
-    );
- 
         // add a encryption button and action
         JButton EncryptBtn = new JButton("ENCRYPT Text");
         EncryptBtn.setBounds(90, 90, 220, 40);
         conn1.add(EncryptBtn);
         GUIButtonsSetting(EncryptBtn);
         EncryptBtn.addActionListener(e -> {
-            if(EncryptBtn ==e.getSource())
-            {
-                try{
-                    String text = JOptionPane.showInputDialog("Enter the text to encrypt");
-                    String secretKey = JOptionPane.showInputDialog("Enter the secret key");
-                    if(text.length()>0 && secretKey.length()>0)
+                    if(EncryptBtn ==e.getSource())
                     {
-                        //  password generator class reference
-                        CryptoUtil pass1 = new CryptoUtil();
-                        String passwd = pass1.encrypt(secretKey, text); // encrypting the text
-                        genePassArea = new JTextArea(5,4); // text area for the encrypted text
-                        textArea(passwd,genePassArea); // setting the text area
-                        JOptionPane.showMessageDialog(conn1,new JScrollPane(genePassArea),"Copy your password",JOptionPane.INFORMATION_MESSAGE); // showing the encrypted text
+                        try{
+                            String text = JOptionPane.showInputDialog("Enter the text to encrypt");
+                            String secretKey = JOptionPane.showInputDialog("Enter the secret key");
+                            if(text.length()>0 && secretKey.length()>0)
+                            {
+                                //  password generator class reference
+                                CryptoUtil pass1 = new CryptoUtil();
+                                String passwd = pass1.encrypt(secretKey, text); // encrypting the text
+                                genePassArea = new JTextArea(5,4); // text area for the encrypted text
+                                textArea(passwd,genePassArea); // setting the text area
+                                JOptionPane.showMessageDialog(conn1,new JScrollPane(genePassArea),"Copy your password",JOptionPane.INFORMATION_MESSAGE); // showing the encrypted text
 
+                            }
+                            else JOptionPane.showMessageDialog (conn1,"Write something","Invalid Input Error",JOptionPane.WARNING_MESSAGE);
+
+                        }
+                        catch(Exception ex){JOptionPane.showMessageDialog(conn1,"Write something","EXIT!",JOptionPane.ERROR_MESSAGE);}
                     }
-                    else JOptionPane.showMessageDialog (conn1,"Write something","Invalid Input Error",JOptionPane.WARNING_MESSAGE);
-
                 }
-                catch(Exception ex){JOptionPane.showMessageDialog(conn1,"Write something","EXIT!",JOptionPane.ERROR_MESSAGE);}
-            }
-        }
         );
 
         // add a decryption button and action
-        JButton DecryptBtn = new JButton("DECRYPT Text"); 
+        JButton DecryptBtn = new JButton("DECRYPT Text");
         DecryptBtn.setBounds(90, 160, 220, 40);
         conn1.add(DecryptBtn);
         GUIButtonsSetting(DecryptBtn);
         DecryptBtn.addActionListener(e -> {
-            if(DecryptBtn ==e.getSource())
-            {
-                try{
-                    String text = JOptionPane.showInputDialog("Enter the text to decrypt"); // getting the encrypted text
-                    String secretKey = JOptionPane.showInputDialog("Enter the secret key"); // getting the secret key
-                    if(text.length()>0 && secretKey.length()>0) // checking if the text and secret key is not empty
+                    if(DecryptBtn ==e.getSource())
                     {
-                        //  password generator class reference
-                        CryptoUtil pass1 = new CryptoUtil(); // creating a object of the CryptoUtil class
-                        String passwd = pass1.decrypt(secretKey, text); // decrypting the text
-                        genePassArea = new JTextArea(5,4); // text area for the decrypted text
-                        textArea(passwd,genePassArea); // setting the text area
-                        JOptionPane.showMessageDialog(conn1,new JScrollPane(genePassArea),"Decrypted text",JOptionPane.INFORMATION_MESSAGE); // showing the decrypted text
+                        try{
+                            String text = JOptionPane.showInputDialog("Enter the text to decrypt"); // getting the encrypted text
+                            String secretKey = JOptionPane.showInputDialog("Enter the secret key"); // getting the secret key
+                            if(text.length()>0 && secretKey.length()>0) // checking if the text and secret key is not empty
+                            {
+                                //  password generator class reference
+                                CryptoUtil pass1 = new CryptoUtil(); // creating a object of the CryptoUtil class
+                                String passwd = pass1.decrypt(secretKey, text); // decrypting the text
+                                genePassArea = new JTextArea(5,4); // text area for the decrypted text
+                                textArea(passwd,genePassArea); // setting the text area
+                                JOptionPane.showMessageDialog(conn1,new JScrollPane(genePassArea),"Decrypted text",JOptionPane.INFORMATION_MESSAGE); // showing the decrypted text
 
+                            }
+                            else JOptionPane.showMessageDialog (conn1,"Password length must be greater than 8!","Invalid Input Error",JOptionPane.WARNING_MESSAGE);
+
+                        }
+                        catch(Exception ex){JOptionPane.showMessageDialog(conn1,"Write something","EXIT!",JOptionPane.ERROR_MESSAGE);}
                     }
-                    else JOptionPane.showMessageDialog (conn1,"Password length must be greater than 8!","Invalid Input Error",JOptionPane.WARNING_MESSAGE);
-
                 }
-                catch(Exception ex){JOptionPane.showMessageDialog(conn1,"Write something","EXIT!",JOptionPane.ERROR_MESSAGE);}
-            }
-        }
         );
 
         //storing password using hashtable
@@ -528,32 +500,32 @@ class PasswordManager implements ActionListener {
         GUIButtonsSetting(PassStoreBtn);
         //Store password action
         PassStoreBtn.addActionListener(e -> {
-            if(PassStoreBtn ==e.getSource())
-            {
-                try{
-                    StoringGUI();
-                    // action on the Store btn
-                    AccAddBtn.addActionListener(e4 -> {
-                        if (AccAddBtn == e4.getSource()) {
-                            String account_name = tAcc.getText(); // getting the account name
-                            String acc_pass = tPass.getText(); // getting the password
-                            if (account_name.isEmpty() && acc_pass.isEmpty()) {
-                                JOptionPane.showMessageDialog(conn2,"unable to store your password!","ERROR",JOptionPane.ERROR_MESSAGE);
-                            }
-                            else{
-                                //calling put method of the hashtablePassword class
-                                data.add_Acc(account_name,acc_pass); // adding the account name and password to the hashtable
-                                JOptionPane.showMessageDialog(conn2, "Account added Successfully !");
-                                tAcc.setText(null);
-                                tPass.setText(null);
-                            }
+                    if(PassStoreBtn ==e.getSource())
+                    {
+                        try{
+                            StoringGUI();
+                            // action on the Store btn
+                            AccAddBtn.addActionListener(e4 -> {
+                                        if (AccAddBtn == e4.getSource()) {
+                                            String account_name = tAcc.getText(); // getting the account name
+                                            String acc_pass = tPass.getText(); // getting the password
+                                            if (account_name.isEmpty() && acc_pass.isEmpty()) {
+                                                JOptionPane.showMessageDialog(conn2,"unable to store your password!","ERROR",JOptionPane.ERROR_MESSAGE);
+                                            }
+                                            else{
+                                                //calling put method of the hashtablePassword class
+                                                data.add_Acc(account_name,acc_pass); // adding the account name and password to the hashtable
+                                                JOptionPane.showMessageDialog(conn2, "Account added Successfully !");
+                                                tAcc.setText(null);
+                                                tPass.setText(null);
+                                            }
+                                        }
+                                    }
+                            );
                         }
-                      }
-                    );
+                        catch(Exception ex) {JOptionPane.showMessageDialog(conn2,"Write something","EXIT",JOptionPane.ERROR_MESSAGE);}
+                    }
                 }
-           catch(Exception ex) {JOptionPane.showMessageDialog(conn2,"Write something","EXIT",JOptionPane.ERROR_MESSAGE);}
-            }
-        }
         );
 
         //searching password
@@ -562,24 +534,24 @@ class PasswordManager implements ActionListener {
         PassSearchBtn.setBounds(90, 300, 220, 40);
         conn1.add(PassSearchBtn);
         PassSearchBtn.addActionListener(e ->{
-            if (PassSearchBtn ==e.getSource()){
-                try{
-                    String acc_name = JOptionPane.showInputDialog("Enter your Account Name"); // getting the account name
-                    if (!acc_name.isBlank()) { // checking if the account name is not empty
-                        Object pass = data.get_Acc(acc_name.toLowerCase()); // getting the password of the account name
-                        if(pass!=null) { // checking if the password is not null
-                            searchPassArea = new JTextArea(4,5); // text area for the password
-                            textArea(String.valueOf(pass), searchPassArea); // setting the text area
-                            JOptionPane.showMessageDialog(conn1, new JScrollPane(searchPassArea), "Copy your password", JOptionPane.INFORMATION_MESSAGE);
+                    if (PassSearchBtn ==e.getSource()){
+                        try{
+                            String acc_name = JOptionPane.showInputDialog("Enter your Account Name"); // getting the account name
+                            if (!acc_name.isBlank()) { // checking if the account name is not empty
+                                Object pass = data.get_Acc(acc_name.toLowerCase()); // getting the password of the account name
+                                if(pass!=null) { // checking if the password is not null
+                                    searchPassArea = new JTextArea(4,5); // text area for the password
+                                    textArea(String.valueOf(pass), searchPassArea); // setting the text area
+                                    JOptionPane.showMessageDialog(conn1, new JScrollPane(searchPassArea), "Copy your password", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                                else JOptionPane.showMessageDialog(conn1, "Account not Found!");
+                            }
                         }
-                        else JOptionPane.showMessageDialog(conn1, "Account not Found!");
+                        catch (Exception ex){
+                            JOptionPane.showMessageDialog(conn1,"Write something","EXIT",JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
-                catch (Exception ex){
-                    JOptionPane.showMessageDialog(conn1,"Write something","EXIT",JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
         );
 
         // deleting password
@@ -588,73 +560,73 @@ class PasswordManager implements ActionListener {
         PassDeleteBtn.setBounds(90, 370, 220, 40);
         conn1.add(PassDeleteBtn);
         PassDeleteBtn.addActionListener(e -> {
-            if (PassDeleteBtn == e.getSource()) {
-                try {
-                    String acc_name = JOptionPane.showInputDialog("Enter the Account Name"); // getting the account name
-                    if (!acc_name.isBlank()) {
-                        data.remove_Acc(acc_name.toLowerCase()); // removing the account name and password from the hashtable
-                        JOptionPane.showMessageDialog(conn1, "Delete successfully!"); // showing the message
+                    if (PassDeleteBtn == e.getSource()) {
+                        try {
+                            String acc_name = JOptionPane.showInputDialog("Enter the Account Name"); // getting the account name
+                            if (!acc_name.isBlank()) {
+                                data.remove_Acc(acc_name.toLowerCase()); // removing the account name and password from the hashtable
+                                JOptionPane.showMessageDialog(conn1, "Delete successfully!"); // showing the message
+                            }
+                            else JOptionPane.showMessageDialog(conn1, "Account not found!", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(conn1, "Write something", "EXIT", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
-                    else JOptionPane.showMessageDialog(conn1, "Account not found!", "INFO", JOptionPane.INFORMATION_MESSAGE);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(conn1, "Write something", "EXIT", JOptionPane.ERROR_MESSAGE);
+
                 }
-            }
-
-        }
         );
-
+        // Adding Notes
         addNoteBtn = new JButton("ADD NOTE");
         GUIButtonsSetting(addNoteBtn);
         addNoteBtn.setBounds(90, 440, 220, 40);
         conn1.add(addNoteBtn);
         addNoteBtn.addActionListener(e -> {
-            if (addNoteBtn == e.getSource()) {
-                try {
-                    NoteGUI();
-                    // action on the add note btn
-                    addNote.addActionListener(e4 -> {
-                        if (addNote == e4.getSource()) {
-                            String note = tNote.getText(); // getting the note
-                            if (note.isEmpty()) {
-                                JOptionPane.showMessageDialog(conn3, "unable to store your note!", "ERROR", JOptionPane.ERROR_MESSAGE);
-                            } else {
-                                //calling put method of the hashtablePassword class
-                                notes.add(note); // adding the note to the arraylist
-                                JOptionPane.showMessageDialog(conn3, "Note added Successfully !");
-                                conn3.setVisible(false);
-                                tNote.setText(null);
-                            }
+                    if (addNoteBtn == e.getSource()) {
+                        try {
+                            NoteGUI();
+                            // action on the add note btn
+                            addNote.addActionListener(e4 -> {
+                                if (addNote == e4.getSource()) {
+                                    String note = tNote.getText(); // getting the note
+                                    if (note.isEmpty()) {
+                                        JOptionPane.showMessageDialog(conn3, "unable to store your note!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                                    } else {
+                                        //calling put method of the hashtablePassword class
+                                        notes.add(note); // adding the note to the arraylist
+                                        JOptionPane.showMessageDialog(conn3, "Note added Successfully !");
+                                        conn3.setVisible(false);
+                                        tNote.setText(null);
+                                    }
+                                }
+                            });
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(conn3, "Write something", "EXIT", JOptionPane.ERROR_MESSAGE);
                         }
-                    });
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(conn3, "Write something", "EXIT", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-            }
-        }
         );
-        
+
         //get all notes
         JButton getNoteBtn = new JButton("GET NOTE");
         GUIButtonsSetting(getNoteBtn);
         getNoteBtn.setBounds(90, 510, 220, 40);
         conn1.add(getNoteBtn);
         getNoteBtn.addActionListener(e -> {
-            if (getNoteBtn == e.getSource()) {
-                try {
-                    String allNotes = notes.get(notes.size() - 1); // getting the last note added
-                    if (allNotes.isEmpty()) { // checking if the note is empty or not
-                        JOptionPane.showMessageDialog(conn1, "No note found!", "INFO", JOptionPane.INFORMATION_MESSAGE); // showing the message
-                    } else {
-                        searchPassArea = new JTextArea(4, 5); // text area for the note
-                        textArea(allNotes, searchPassArea); // setting the text area
-                        JOptionPane.showMessageDialog(conn1, new JScrollPane(searchPassArea), "Get your notes", JOptionPane.INFORMATION_MESSAGE); // showing the message
+                    if (getNoteBtn == e.getSource()) {
+                        try {
+                            String allNotes = notes.get(notes.size() - 1); // getting the last note added
+                            if (allNotes.isEmpty()) { // checking if the note is empty or not
+                                JOptionPane.showMessageDialog(conn1, "No note found!", "INFO", JOptionPane.INFORMATION_MESSAGE); // showing the message
+                            } else {
+                                searchPassArea = new JTextArea(4, 5); // text area for the note
+                                textArea(allNotes, searchPassArea); // setting the text area
+                                JOptionPane.showMessageDialog(conn1, new JScrollPane(searchPassArea), "Get your notes", JOptionPane.INFORMATION_MESSAGE); // showing the message
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(conn1, "Add a note before trying to retrive", "EXIT", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(conn1, "Add a note before trying to retrive", "EXIT", JOptionPane.ERROR_MESSAGE);
                 }
-            }
-        }
         );
 
     }
@@ -671,28 +643,28 @@ class PasswordManager implements ActionListener {
         conn3.setResizable(false);
 
         //add note label
-         addNoteLabel = new JLabel("Add Note");
+        addNoteLabel = new JLabel("Add Note");
         addNoteLabel.setBounds(200, 20, 100, 30);
         conn3.add(addNoteLabel);
 
         //add note text area
-         tNote = new JTextArea(10, 10);
+        tNote = new JTextArea(10, 10);
         tNote.setBounds(100, 60, 300, 300);
         conn3.add(tNote);
 
         //add note button
-         addNote = new JButton("ADD NOTE");
+        addNote = new JButton("ADD NOTE");
         GUIButtonsSetting(addNote);
         addNote.setBounds(140, 380, 220, 30);
         conn3.add(addNote);
     }
 
-    // main method to run the application   
+    // main method to run the application
     public static void main(String[] args) {
         //loading screen class
         new SplashScreen();
         try {
             new PasswordManager();
         }catch (Exception ex) { ex.printStackTrace(); }
- }
+    }
 }
