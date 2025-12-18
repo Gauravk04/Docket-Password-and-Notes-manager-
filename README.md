@@ -1,28 +1,181 @@
-# Password-and-Notes-manager
-This Project is designed using Java using all its attributes such as encryption and decryption for Passwords and also helps for saving Notes in it. 
-Project 'Password Manager' allows users to securely store and manage their login credentials for different websites and applications. This project involves creating a user interface that allows users to input, edit, and delete their login information. The user interface should also provide options for generating strong passwords and auto-filling login forms.
+# 🔐 Docket - Password & Notes Manager
 
-This project has also included encryption and decryption features to ensure that user data is securely stored and only accessible by the user. Additionally, this project should implement features for backup and restore of data, as well as password recovery in case the user forgets their master password. It also includes the facility of saving our important notes which we can use anytime. Overall, This password manager should be designed with security and ease-of-use in mind, providing a reliable and convenient way for users to manage their passwords and protect their online accounts from unauthorized access.
+A modern, secure password and notes management application built with Java Swing, featuring Material Design UI and advanced encryption.
 
+## ✨ Features
 
-Screenshots:
+- 🔑 **Password Generator** - Generate strong, random passwords
+- 🔒 **Text Encryption/Decryption** - Secure your sensitive text with AES encryption
+- 💾 **Password Storage** - Store and manage account passwords securely
+- 🔍 **Password Search** - Quick search for stored passwords
+- 🗑️ **Password Management** - Delete unwanted password entries
+- 📝 **Notes Management** - Add and retrieve personal notes
+- 🎨 **Modern UI** - Beautiful Material Design inspired interface
+- ⚡ **Fast & Lightweight** - Quick startup with animated splash screen
 
-Loading Interface: 
+## 📁 Project Structure
 
-![Screenshot 2024-01-19 213016](https://github.com/Gauravk04/Password-and-Notes-manager/assets/121782880/63ae240c-d2e2-4523-8629-0b1ef0456b56)
+```
+Docket-Password-and-Notes-manager/
+├── src/
+│   └── main/
+│       └── java/
+│           └── com/
+│               └── docket/
+│                   ├── Docket.java              # Main entry point
+│                   ├── SplashScreen.java        # Loading screen
+│                   ├── PasswordManagerUI.java   # Main UI
+│                   ├── HashtablePassword.java   # Password storage
+│                   ├── HashTableMap.java        # Storage interface
+│                   ├── CryptoUtil.java          # Encryption utilities
+│                   └── PasswordGenerator.java   # Password generation
+├── bin/                                         # Compiled classes (auto-generated)
+├── run.sh                                       # Run script
+└── README.md                                    # This file
+```
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------
-Main Interface: 
+## 🚀 Quick Start
 
-![Screenshot 2024-01-19 213222](https://github.com/Gauravk04/Password-and-Notes-manager/assets/121782880/96249f18-78c6-4dfb-b354-0f7361918441)
+### Prerequisites
+- Java Development Kit (JDK) 8 or higher
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-Functionality:
+### Running the Application
 
+**Method 1: Using run.sh (Recommended)**
+```bash
+# Make script executable (first time only)
+chmod +x run.sh
 
-![Screenshot 2024-01-19 213248](https://github.com/Gauravk04/Password-and-Notes-manager/assets/121782880/dcdb9d04-5aac-4170-a127-2f14c3801fd6)
+# Run the application
+./run.sh
+```
 
+The script automatically:
+- Creates the `bin/` directory if needed
+- Cleans old compiled files
+- Compiles all Java source files
+- Runs the application
 
-![image](https://github.com/Gauravk04/Password-and-Notes-manager/assets/121782880/0a16939d-3533-4c24-85a3-23b513428b83)
+**Method 2: Using IntelliJ IDEA**
+1. Open the project in IntelliJ IDEA
+2. Navigate to: `src/main/java/com/docket/Docket.java`
+3. Right-click → **Run 'Docket.main()'**
+4. Or click the green ▶️ play button
 
+**Method 3: Manual Compilation**
+```bash
+# Compile
+javac -d bin src/main/java/com/docket/*.java
+
+# Run
+java -cp bin com.docket.Docket
+```
+
+## 🔒 Security Features
+
+- **PBE Encryption**: Password-Based Encryption using MD5 and DES
+- **Hashtable Storage**: Custom hashtable implementation for efficient password storage
+- **Secure Random**: Cryptographically strong random password generation
+- **Linear Probing**: Collision resolution for hashtable operations
+
+## 💻 Usage
+
+1. **Generate Password**: Click "GENERATE PASSWORD" and specify desired length
+2. **Encrypt Text**: Enter text and secret key to encrypt sensitive information
+3. **Decrypt Text**: Provide encrypted text and correct secret key to decrypt
+4. **Store Password**: Add account name and password to secure storage
+5. **Search Password**: Enter account name to retrieve stored password
+6. **Delete Password**: Remove account credentials from storage
+7. **Add Note**: Create and save personal notes
+8. **Get Note**: Retrieve saved notes
+
+## 🛠️ Technical Details
+
+### Why No Maven/Gradle?
+
+This project uses a simple shell script instead of build tools like Maven or Gradle because:
+
+- ✅ **No External Dependencies** - Project uses only Java standard libraries
+- ✅ **Simplicity** - Easy to understand what's happening
+- ✅ **Lightweight** - No additional tools to install
+- ✅ **Transparency** - See exactly what commands are executed
+
+**Note:** Professional projects with external libraries (JSON parsers, database drivers, etc.) typically use Maven/Gradle for automatic dependency management. Since this project has zero external dependencies, a simple shell script is sufficient and appropriate.
+
+### Build Process
+
+The `run.sh` script does three things:
+```bash
+1. rm -rf bin/*              # Clean old files
+2. javac -d bin src/...      # Compile to bin/
+3. java -cp bin com.docket.Docket  # Run
+```
+
+That's it! No complex configuration needed.
+
+## 🐛 Troubleshooting
+
+### `.class` files appear in root directory
+
+If you see files like `SplashScreen.class` in the root, delete them:
+```bash
+rm *.class
+```
+
+These should only exist in `bin/`. They were likely created by accidentally running `javac` without the `-d bin` flag. The `.gitignore` file prevents them from being committed.
+
+### Permission denied error
+
+```bash
+chmod +x run.sh
+```
+
+### "Command not found: javac"
+
+Install JDK (not just JRE):
+```bash
+# macOS
+brew install openjdk
+
+# Check version
+java -version
+javac -version
+```
+
+## 🎨 UI Highlights
+
+- **Material Design** - Clean, modern Google-inspired interface
+- **Smooth Animations** - Hover effects, transitions, splash screen
+- **Responsive Layout** - Intuitive organization
+- **Custom Styling** - Styled buttons, text fields, gradients
+
+## 📝 Development
+
+### Architecture
+
+- **Separation of Concerns** - Each class has single responsibility
+- **Clean Build** - Compiled classes isolated in `bin/`
+- **Version Control** - Build artifacts ignored by git
+- **Organized Structure** - Standard Maven-style directory layout
+
+### Adding Features
+
+1. Create new `.java` file in `src/main/java/com/docket/`
+2. Add package declaration: `package com.docket;`
+3. Run `./run.sh` to compile and test
+
+## 📄 License
+
+Open source - available for educational purposes.
+
+## 👤 Author
+
+**Gaurav**
+
+---
+
+**Security Note**: This is an educational project. For production use, consider:
+- AES-256 encryption instead of PBE with DES
+- Secure key storage mechanisms
+- Additional authentication layers
 
