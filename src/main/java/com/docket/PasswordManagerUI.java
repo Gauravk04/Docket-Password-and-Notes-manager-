@@ -143,10 +143,12 @@ public class PasswordManagerUI implements ActionListener {
         headerPanel.setBounds(0, 0, 500, 80);
         headerPanel.setLayout(null);
 
+        // Use full header width and center alignment to avoid clipping
         JLabel titleLabel = new JLabel("🔒 Store Password");
         titleLabel.setFont(new Font("Product Sans", Font.BOLD, 28));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(140, 25, 300, 35);
+        titleLabel.setBounds(0, 22, 500, 35);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerPanel.add(titleLabel);
         conn2.add(headerPanel);
 
@@ -310,16 +312,19 @@ public class PasswordManagerUI implements ActionListener {
         headerPanel.setBounds(0, 0, 520, 120);
         headerPanel.setLayout(null);
 
+        // Make header labels full-width and center-aligned so text isn't clipped
         JLabel titleLabel = new JLabel("🔐 DOCKET");
         titleLabel.setFont(new Font("Product Sans", Font.BOLD, 42));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(170, 25, 200, 50);
+        titleLabel.setBounds(0, 18, 520, 50); // full header width
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerPanel.add(titleLabel);
 
         JLabel subtitleLabel = new JLabel("Password & Notes Manager");
         subtitleLabel.setFont(new Font("Product Sans", Font.PLAIN, 16));
         subtitleLabel.setForeground(new Color(255, 255, 255, 230));
-        subtitleLabel.setBounds(135, 75, 300, 25);
+        subtitleLabel.setBounds(0, 70, 520, 22);
+        subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerPanel.add(subtitleLabel);
 
         conn1.add(headerPanel);
@@ -428,12 +433,13 @@ public class PasswordManagerUI implements ActionListener {
                                         if (AccAddBtn == e4.getSource()) {
                                             String account_name = tAcc.getText(); // getting the account name
                                             String acc_pass = tPass.getText(); // getting the password
-                                            if (account_name.isEmpty() && acc_pass.isEmpty()) {
+                                            if (account_name.isEmpty() || acc_pass.isEmpty()) {
+                                                // require both fields
                                                 JOptionPane.showMessageDialog(conn2,"unable to store your password!","ERROR",JOptionPane.ERROR_MESSAGE);
                                             }
                                             else{
-                                                //calling put method of the hashtablePassword class
-                                                data.add_Acc(account_name,acc_pass); // adding the account name and password to the hashtable
+                                                // store keys in lowercase so searches/removals are case-insensitive
+                                                data.add_Acc(account_name.toLowerCase(), acc_pass); // adding the account name and password to the hashtable
                                                 JOptionPane.showMessageDialog(conn2, "Account added Successfully !");
                                                 tAcc.setText(null);
                                                 tPass.setText(null);

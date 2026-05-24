@@ -62,9 +62,9 @@ public class HashtablePassword implements HashTableMap {
             }
             if(entry == NIL)continue;
             if(entry.key.equals(Account)){
-                Object oldValue = entry.value;
-                entries[j].value = passwd;
-                return (int) oldValue;
+                // replace the value and return the slot hash (keep return type int)
+                entry.value = passwd;
+                return h;
             }
         }
         return h;
